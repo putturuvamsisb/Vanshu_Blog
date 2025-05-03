@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vanshu – India's Premium Blog</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #fef9f3;
+      color: #2c2a29;
+      overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 20px 20px 0 0;
+      transition: transform 0.4s ease;
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0e9d2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c49b4a;
+      border-radius: 5px;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255 255 255 / 0.95);
+      box-shadow: 0 4px 15px rgb(196 155 74 / 0.3);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.5s;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      background: linear-gradient(90deg, #d4af37, #f5deb3);
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      letter-spacing: 3px;
+      cursor: pointer;
+      text-shadow: 0 0 10px #d4af37;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    nav ul li a {
+      position: relative;
+      padding: 0.25rem 0;
+      color: #2c2a29;
+      transition: color 0.3s;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: #d4af37;
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+    nav ul li a:hover {
+      color: #d4af37;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    nav .theme-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #d4af37;
+      user-select: none;
+      transition: color 0.3s;
+    }
+    nav .theme-toggle:hover {
+      color: #b08b2f;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      background: linear-gradient(135deg, #fef9f3 0%, #f5e1a4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-text {
+      max-width: 600px;
+      z-index: 10;
+    }
+    .hero-text h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 4.5rem;
+      line-height: 1.1;
+      font-weight: 900;
+      background: linear-gradient(90deg, #d4af37, #f5deb3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-shadow: 0 3px 10px rgb(212 175 55 / 0.5);
+      animation: glowText 3s ease-in-out infinite alternate;
+    }
+    @keyframes glowText {
+      0% { text-shadow: 0 3px 10px rgb(212 175 55 / 0.5); }
+      100% { text-shadow: 0 0 30px rgb(212 175 55 / 0.9); }
+    }
+    .hero-text p {
+      font-size: 1.3rem;
+      color: #5a4e3c;
+      margin-bottom: 2rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .hero-text .btn-primary {
+      background: #d4af37;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      box-shadow: 0 6px 15px rgb(212 175 55 / 0.4);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero-text .btn-primary:hover {
+      background: #b08b2f;
+      box-shadow: 0 8px 20px rgb(176 139 47 / 0.7);
+    }
+    .hero-graphic {
+      width: 50vw;
+      max-width: 700px;
+      position: relative;
+      filter: drop-shadow(0 15px 20px rgb(212 175 55 / 0.4));
+      animation: floatUpDown 6s ease-in-out infinite;
+    }
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Particle animation container */
+    .particles-container {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 5;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.7;
+      background: radial-gradient(circle, #d4af37 0%, transparent 70%);
+      animation: particleMove linear infinite;
+    }
+    @keyframes particleMove {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      100% { transform: translateY(-150vh) scale(0.5); opacity: 0; }
+    }
+
+    /* Blog Section */
+    .blog-section {
+      padding: 5rem 8vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .blog-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #6b5b3b;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 2px rgb(0 0 0 / 0.1);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap: 3rem;
+    }
+    .blog-card {
+      background: #fff9e6;
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgb(212 175 55 / 0.2);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+    .blog-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 60px rgb(212 175 55 / 0.4);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      transition: transform 0.4s ease;
+    }
+    .blog-card:hover img {
+      transform: scale(1.1);
+    }
+    .blog-content {
+      padding: 1.8rem 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-category {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #d4af37;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    .blog-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #4a3c1a;
+      flex-grow: 1;
+      transition: color 0.3s;
+    }
+    .blog-card:hover .blog-title {
+      color: #b08b2f;
+    }
+    .blog-description {
+      font-size: 1rem;
+      color: #6b5b3b;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .read-more {
+      align-self: flex-start;
+      font-weight: 700;
+      color: #d4af37;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .read-more:hover {
+      border-color: #b08b2f;
+    }
+
+    /* Footer */
+    footer {
+      background: #4a3c1a;
+      color: #f5deb3;
+      text-align: center;
+      padding: 3rem 1rem;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      font-weight: 600;
+      user-select: none;
+      margin-top: 5rem;
+      box-shadow: inset 0 10px 20px rgb(0 0 0 / 0.3);
+    }
+    footer span {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #d4af37;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem 3vw;
+      }
+      .hero-graphic {
+        width: 80vw;
+        max-width: none;
+        margin-top: 3rem;
+      }
+      nav {
+        padding: 1rem 2rem;
+      }
+      nav ul {
+        gap: 1.2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      nav .logo {
+        font-size: 1.4rem;
+      }
+      nav ul {
+        font-size: 0.9rem;
+        gap: 1rem;
+      }
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+      .hero-text p {
+        font-size: 1.1rem;
+      }
+      .blog-section h2 {
+        font-size: 2.2rem;
+      }
+      .blog-card img {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo" tabindex="0" aria-label="Vanshu Blog Logo">Vanshu</div>
+    <ul>
+      <li><a href="#home" tabindex="0">Home</a></li>
+      <li><a href="#culture" tabindex="0">Culture</a></li>
+      <li><a href="#food" tabindex="0">Food</a></li>
+      <li><a href="#travel" tabindex="0">Travel</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+    </ul>
+    <div class="theme-toggle" role="button" aria-label="Toggle dark mode" tabindex="0">🌙</div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home" aria-label="Welcome section">
+    <div class="hero-text" role="region" aria-live="polite">
+      <h1>Vanshu – Celebrating India's Rich Heritage</h1>
+      <p>Explore stories, traditions, and inspirations from every corner of Bharat.</p>
+      <button class="btn-primary" onclick="alert('Welcome to Vanshu!')">Explore Now</button>
+    </div>
+    <img src="https://tse2.mm.bing.net/th/id/OIP.G1iUicflmofi5BTSS5aBKgHaE7?rs=1&pid=ImgDetMain" alt="Indian cultural illustration" class="hero-graphic" aria-hidden="true" />
+    <!-- Particles container -->
+    <div class="particles-container" aria-hidden="true"></div>
+  </section>
+
+  <!-- ... rest of the code remains the same above ... -->
+
+  <!-- Blog Section -->
+  <section class="blog-section" id="culture" aria-label="Blog articles">
+    <h2>Latest Stories from India</h2>
+    <div class="blog-grid">
+      <!-- Blog Card 1 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian classical dance">
+        <span class="blog-category">Culture</span>
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Indian classical dance" />
+        <div class="blog-content">
+          <h3 class="blog-title">The Grace of Indian Classical Dance</h3>
+          <p class="blog-description">Dive deep into the history and beauty of Bharatnatyam and Kathak.</p>
+          <a href="#" class="read-more" aria-label="Read more about Indian classical dance">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 2 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian cuisine">
+        <span class="blog-category">Food</span>
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80" alt="Indian cuisine" />
+        <div class="blog-content">
+          <h3 class="blog-title">Flavors of India: A Culinary Journey</h3>
+          <p class="blog-description">Experience the spices and aromas that define Indian kitchens.</p>
+          <a href="#" class="read-more" aria-label="Read more about Indian cuisine">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 3 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian travel destinations">
+        <span class="blog-category">Travel</span>
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Indian travel destination" />
+        <div class="blog-content">
+          <h3 class="blog-title">Hidden Gems of India</h3>
+          <p class="blog-description">Discover the untouched beauty of India's offbeat locations.</p>
+          <a href="#" class="read-more" aria-label="Read more about Indian travel">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 4 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian festivals">
+        <span class="blog-category">Festivals</span>
+        <img src="https://whatson.ae/wp-content/uploads/2020/11/global-village-diwali-fireworks.jpg" alt="Indian festival celebration" />
+        <div class="blog-content">
+          <h3 class="blog-title">Diwali: Festival of Lights</h3>
+          <p class="blog-description">Explore the vibrant traditions and stories behind India’s most celebrated festival.</p>
+          <a href="#" class="read-more" aria-label="Read more about Diwali festival">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 5 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian spirituality">
+        <span class="blog-category">Spirituality</span>
+        <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=600&q=80" alt="Indian spiritual temple" />
+        <div class="blog-content">
+          <h3 class="blog-title">The Essence of Yoga and Meditation</h3>
+          <p class="blog-description">Discover the roots of yoga and meditation practices from India’s ancient wisdom.</p>
+          <a href="#" class="read-more" aria-label="Read more about yoga and meditation">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 6 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian art">
+        <span class="blog-category">Art</span>
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Indian traditional art" />
+        <div class="blog-content">
+          <h3 class="blog-title">Madhubani Painting: Colors of Bihar</h3>
+          <p class="blog-description">A journey through the intricate patterns and stories of Madhubani art.</p>
+          <a href="#" class="read-more" aria-label="Read more about Madhubani painting">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 7 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian music">
+        <span class="blog-category">Music</span>
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Indian classical music" />
+        <div class="blog-content">
+          <h3 class="blog-title">Ragas: The Soul of Indian Classical Music</h3>
+          <p class="blog-description">Understanding the mood and structure of ragas in Indian music tradition.</p>
+          <a href="#" class="read-more" aria-label="Read more about Indian classical music">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 8 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian cinema">
+        <span class="blog-category">Cinema</span>
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Indian cinema" />
+        <div class="blog-content">
+          <h3 class="blog-title">Bollywood: Dreams and Realities</h3>
+          <p class="blog-description">A deep dive into India’s largest film industry and its global impact.</p>
+          <a href="#" class="read-more" aria-label="Read more about Bollywood cinema">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Blog Card 9 -->
+      <article class="blog-card" tabindex="0" aria-label="Article on Indian literature">
+        <span class="blog-category">Literature</span>
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="Indian literature" />
+        <div class="blog-content">
+          <h3 class="blog-title">The Legacy of Rabindranath Tagore</h3>
+          <p class="blog-description">Exploring the works and influence of India’s Nobel laureate poet.</p>
+          <a href="#" class="read-more" aria-label="Read more about Rabindranath Tagore">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <p>© 2025 Vanshu – Proudly Indian, Globally Inspired</p>
+    <span>Made with ❤️ in Bharat</span>
+  </footer>
+
+  <script>
+    // Dark/light mode toggle
+    const toggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    toggle.addEventListener('click', () => {
+      if(body.dataset.theme === 'dark') {
+        body.removeAttribute('data-theme');
+        toggle.textContent = '🌙';
+      } else {
+        body.dataset.theme = 'dark';
+        toggle.textContent = '☀️';
+      }
+    });
+
+    // Particle effect in hero
+    const particlesContainer = document.querySelector('.particles-container');
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 6 + 4;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * window.innerWidth + 'px';
+      particle.style.bottom = '-10px';
+      particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      particle.style.animationDelay = (Math.random() * 5) + 's';
+      particlesContainer.appendChild(particle);
+
+      particle.addEventListener('animationend', () => {
+        particle.remove();
+      });
+    }
+
+    setInterval(createParticle, 300);
+
+  </script>
+
+  <style>
+    /* Particle style */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, #d4af37 0%, transparent 70%);
+      opacity: 0.8;
+      animation-name: riseParticle;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+    @keyframes riseParticle {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-150vh) scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    /* Dark theme overrides */
+    body[data-theme="dark"] {
+      background: #1c1b1a;
+      color: #e0d8b0;
+    }
+    body[data-theme="dark"] nav {
+      background: rgba(28,27,26,0.95);
+      box-shadow: 0 4px 15px rgb(212 175 55 / 0.3);
+    }
+    body[data-theme="dark"] nav .logo {
+      background: linear-gradient(90deg, #f5deb3, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px #d4af37;
+    }
+    body[data-theme="dark"] nav ul li a {
+      color: #e0d8b0 !important;
+    }
+    body[data-theme="dark"] nav ul li a:hover {
+      color: #d4af37 !important;
+    }
+    body[data-theme="dark"] .hero {
+      background: linear-gradient(135deg, #2d2a27 0%, #3b352f 100%);
+    }
+    body[data-theme="dark"] .hero-text p {
+      color: #d4af37;
+    }
+    body[data-theme="dark"] .blog-card {
+      background: #3b352f;
+      box-shadow: 0 10px 40px rgb(212 175 55 / 0.4);
+      color: #f5deb3;
+    }
+    body[data-theme="dark"] .blog-category {
+      color: #f5deb3;
+    }
+    body[data-theme="dark"] .blog-title {
+      color: #f5deb3;
+    }
+    body[data-theme="dark"] .blog-description {
+      color: #e0d8b0;
+    }
+    body[data-theme="dark"] footer {
+      background: #2c2a28;
+      color: #d4af37;
+    }
+  </style>
+</body>
+</html>
